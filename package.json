@@ -1,0 +1,16 @@
+{
+  "name": "@skeleton/monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Skeleton monorepo - Node.js Express TypeScript with DDD & Clean Architecture",
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "lint": "pnpm -r run lint",
+    "clean": "pnpm -r run clean"
+  }
+}
