@@ -3,10 +3,14 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./src",
+    "composite": true,
     "paths": {
       "@shared/error-handling": ["../error-handling/src"]
     }
   },
+  "references": [
+    { "path": "../error-handling" }
+  ],
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }

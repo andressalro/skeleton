@@ -3,11 +3,8 @@ import { LogLevel } from './log-level';
 
 describe('Logger', () => {
   let logger: Logger;
-  let output: string[];
 
   beforeEach(() => {
-    output = [];
-    // Create logger with JSON format (non-pretty) for testable output
     logger = createLogger({
       serviceName: 'test-service',
       level: LogLevel.DEBUG,

@@ -13,7 +13,7 @@ class TestController extends BaseController {
     this.responseData = data;
   }
 
-  protected async executeImpl(req: Request, res: Response, _next: NextFunction): Promise<void> {
+  protected async executeImpl(_req: Request, res: Response, _next: NextFunction): Promise<void> {
     if (this.shouldFail) {
       throw new Error('Something went wrong');
     }

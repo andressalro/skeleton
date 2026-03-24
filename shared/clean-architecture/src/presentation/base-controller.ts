@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express';
-import { BaseError } from '@shared/error-handling';
 
 export abstract class BaseController {
   protected abstract executeImpl(req: Request, res: Response, next: NextFunction): Promise<void>;
