@@ -23,6 +23,11 @@ describe('ValueObject', () => {
     expect(email.value).toBe('test@example.com');
   });
 
+  it('should throw if props is null or undefined', () => {
+    expect(() => new (Email as any)(null)).toThrow('ValueObject props cannot be null or undefined');
+    expect(() => new (Email as any)(undefined)).toThrow('ValueObject props cannot be null or undefined');
+  });
+
   it('should compare two value objects with same props as equal', () => {
     const email1 = Email.create('test@example.com');
     const email2 = Email.create('test@example.com');
@@ -45,5 +50,15 @@ describe('ValueObject', () => {
     expect(() => {
       (email as any).props.value = 'hacked@evil.com';
     }).toThrow();
+  });
+
+  it('should serialize to primitives', () => {
+    const email = Email.create('test@example.com');
+    expect(email.toPrimitives()).toEqual({ value: 'test@example.com' });
+  });
+
+  it('toString should return JSON string of primitives', () => {
+    const email = Email.create('test@example.com');
+    expect(email.toString()).toBe('{"value":"test@example.com"}');
   });
 });

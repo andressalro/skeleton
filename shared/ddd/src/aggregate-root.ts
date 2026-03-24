@@ -5,15 +5,17 @@ import { DomainEvent } from './events/domain-event';
 export abstract class AggregateRoot<TProps> extends Entity<TProps> {
   private _domainEvents: DomainEvent[] = [];
 
-  get domainEvents(): ReadonlyArray<DomainEvent> {
-    return [...this._domainEvents];
+  protected constructor(props: TProps, id?: UniqueEntityId) {
+    super(props, id);
   }
 
-  protected addDomainEvent(event: DomainEvent): void {
-    this._domainEvents.push(event);
-  }
-
-  clearEvents(): void {
+  pullDomainEvents(): DomainEvent[] {
+    const events = this._domainEvents.slice();
     this._domainEvents = [];
+    return events;
+  }
+
+  protected recordEvent(event: DomainEvent): void {
+    this._domainEvents.push(event);
   }
 }

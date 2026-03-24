@@ -47,4 +47,31 @@ describe('Entity', () => {
     const entity = TestEntity.create({ name: 'test' });
     expect(entity.equals(entity)).toBe(true);
   });
+
+  it('should return false when comparing entities of different classes', () => {
+    class OtherEntity extends Entity<TestEntityProps> {
+      static create(props: TestEntityProps, id?: UniqueEntityId): OtherEntity {
+        return new OtherEntity(props, id);
+      }
+    }
+    const id = new UniqueEntityId();
+    const entity1 = TestEntity.create({ name: 'a' }, id);
+    const entity2 = OtherEntity.create({ name: 'a' }, id);
+    expect(entity1.equals(entity2)).toBe(false);
+  });
+
+  it('should serialize to primitives with id', () => {
+    const entity = TestEntity.create({ name: 'Alice' });
+    const primitives = entity.toPrimitives();
+    expect(primitives).toEqual({
+      id: entity.id.toString(),
+      name: 'Alice',
+    });
+  });
+
+  it('toString should return JSON representation', () => {
+    const entity = TestEntity.create({ name: 'Alice' });
+    const expected = JSON.stringify({ id: entity.id.toString(), name: 'Alice' });
+    expect(entity.toString()).toBe(expected);
+  });
 });

@@ -8,8 +8,12 @@ interface OrderProps {
 
 class OrderCreatedEvent extends BaseDomainEvent {
   readonly eventName = 'OrderCreated';
-  constructor(aggregateId: UniqueEntityId) {
-    super(aggregateId);
+
+  static fromAggregate(aggregate: Order): OrderCreatedEvent {
+    return new OrderCreatedEvent({
+      aggregateId: aggregate.id,
+      payload: aggregate.toPrimitives(),
+    });
   }
 }
 
@@ -20,35 +24,44 @@ class Order extends AggregateRoot<OrderProps> {
 
   static create(props: OrderProps, id?: UniqueEntityId): Order {
     const order = new Order(props, id);
-    order.addDomainEvent(new OrderCreatedEvent(order.id));
+    order.recordEvent(OrderCreatedEvent.fromAggregate(order));
     return order;
   }
 }
 
 describe('AggregateRoot', () => {
-  it('should collect domain events', () => {
+  it('should record and pull domain events', () => {
     const order = Order.create({ total: 100 });
-    expect(order.domainEvents).toHaveLength(1);
-    expect(order.domainEvents[0].eventName).toBe('OrderCreated');
+    const events = order.pullDomainEvents();
+
+    expect(events).toHaveLength(1);
+    expect(events[0].eventName).toBe('OrderCreated');
+    expect(events[0].aggregateId.equals(order.id)).toBe(true);
   });
 
-  it('should clear domain events', () => {
+  it('should clear events after pull', () => {
     const order = Order.create({ total: 100 });
-    expect(order.domainEvents).toHaveLength(1);
-
-    order.clearEvents();
-    expect(order.domainEvents).toHaveLength(0);
+    expect(order.pullDomainEvents()).toHaveLength(1);
+    expect(order.pullDomainEvents()).toHaveLength(0);
   });
 
-  it('should return a copy of domain events (immutable)', () => {
+  it('should return a copy of events on pull (safe from mutation)', () => {
     const order = Order.create({ total: 100 });
-    const events = order.domainEvents;
+    const events = order.pullDomainEvents();
     expect(events).toHaveLength(1);
+    // after pull, no more events
+    expect(order.pullDomainEvents()).toHaveLength(0);
+    // but the pulled array still has the event
+    expect(events).toHaveLength(1);
+  });
 
-    order.clearEvents();
-    // The previously retrieved array should still have 1 event
-    expect(events).toHaveLength(1);
-    expect(order.domainEvents).toHaveLength(0);
+  it('should include payload with aggregate primitives', () => {
+    const order = Order.create({ total: 250 });
+    const events = order.pullDomainEvents();
+    expect(events[0].payload).toEqual({
+      id: order.id.toString(),
+      total: 250,
+    });
   });
 
   it('should inherit entity comparison by id', () => {
@@ -56,5 +69,16 @@ describe('AggregateRoot', () => {
     const order1 = Order.create({ total: 100 }, id);
     const order2 = Order.create({ total: 200 }, id);
     expect(order1.equals(order2)).toBe(true);
+  });
+
+  it('should serialize event correctly', () => {
+    const order = Order.create({ total: 100 });
+    const events = order.pullDomainEvents();
+    const serialized = (events[0] as OrderCreatedEvent).serialize();
+
+    expect(serialized.name).toBe('OrderCreated');
+    expect(serialized.aggregateId).toBe(order.id.value);
+    expect(serialized.payload).toBeDefined();
+    expect(serialized.occurredOn).toBeDefined();
   });
 });
