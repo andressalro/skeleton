@@ -1,3 +1,4 @@
+minimumReleaseAge: 1440 # 1 day to minimize risk of npm supply chain attacks
 packages:
   - "shared/*"
   - "services/*"
