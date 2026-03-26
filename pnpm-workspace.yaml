@@ -1,4 +1,8 @@
-minimumReleaseAge: 1440 # 1 day to minimize risk of npm supply chain attacks
+minimumReleaseAge: 1440 # 1 day to minimize risk of npm chain supply attacks
 packages:
-  - "shared/*"
-  - "services/*"
+  - "common-infra"
+  - "infra"
+  - "packages/shared/*"
+  - "packages/reports/apps/*"
+  - "packages/reports/context/*"
+  - "web/*"

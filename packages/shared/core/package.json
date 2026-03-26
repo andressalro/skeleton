@@ -1,0 +1,29 @@
+{
+  "name": "@libs/core",
+  "version": "1.0.0",
+  "description": "Core library for APS Serverless",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --build --clean && tsc",
+    "lint": "eslint . --fix",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit --pretty"
+  },
+  "keywords": [],
+  "author": "@gokaju",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1"
+  }
+}

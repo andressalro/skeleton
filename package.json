@@ -1,16 +1,31 @@
 {
-  "name": "@skeleton/monorepo",
+  "name": "skeleton",
   "version": "1.0.0",
   "private": true,
-  "description": "Skeleton monorepo - Node.js Express TypeScript with DDD & Clean Architecture",
-  "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
-  },
+  "description": "Skeleton monorepo for microfrontends, microservices and CDK infrastructure",
   "scripts": {
     "build": "pnpm -r run build",
-    "test": "pnpm -r run test",
-    "lint": "pnpm -r run lint",
-    "clean": "pnpm -r run clean"
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "lint": "eslint . --ext .ts,.js --fix",
+    "format": "prettier --write .",
+    "synth": "pnpm --dir infra cdk synth",
+    "diff": "pnpm --dir infra cdk diff",
+    "deploy": "pnpm --dir infra cdk deploy"
+  },
+  "packageManager": "pnpm@10.15.0",
+  "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "@types/node": "^24.3.1",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^9.35.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.4.0",
+    "prettier": "^3.6.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.43.0",
+    "vitest": "^3.2.4"
   }
 }

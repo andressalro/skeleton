@@ -1,0 +1,6 @@
+export enum PdfDocumentStatus {
+  PENDING = 'PENDING',
+  GENERATING = 'GENERATING',
+  GENERATED = 'GENERATED',
+  FAILED = 'FAILED',
+}
