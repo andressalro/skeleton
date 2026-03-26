@@ -7,7 +7,7 @@
   },
   "references": [
     {
-      "path": "../packages/shared/core"
+      "path": "../shared/core"
     }
   ],
   "include": ["src"],

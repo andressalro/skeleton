@@ -10,8 +10,8 @@ packages/
   reports/
     apps/                        Entrypoints del dominio reports
     context/                     Bounded contexts DDD del dominio reports
-  shared/
-    core/                        Building blocks compartidos de DDD/aplicacion
+shared/
+  core/                          Building blocks compartidos de DDD/aplicacion
 common-infra/                    Clientes e infraestructura reutilizable
 infra/                           CDK stacks y constructs
 ```
