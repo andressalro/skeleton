@@ -14,7 +14,7 @@ class TestEventCreated extends DomainEvent {
   static fromAggregate(aggregate: TestAggregate): DomainEvent {
     return new TestEventCreated({
       aggregateId: aggregate.id,
-      payload: aggregate.toPrimitives(),
+      payload: aggregate.toPrimitives()
     })
   }
 }

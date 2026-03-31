@@ -1,0 +1,37 @@
+{
+  "id": "019d2b9d-3a42-70dd-ae69-ad99e8083f4f",
+  "template": {
+    "id": "019d2b9d-3a41-7655-971b-b880ab4ad6b5",
+    "name": "inline-template",
+    "content": {
+      "body": "<html><body><h1><%= employee.name %></h1></body></html>",
+      "header": "<div>Recibo</div>",
+      "footer": "<div>P�gina <span class='pageNumber'></span></div>",
+      "engine": "ejs",
+      "printConfig": {
+        "top": "0.4",
+        "bottom": "0.6",
+        "left": "0.3",
+        "right": "0.2",
+        "format": "Letter"
+      }
+    }
+  },
+  "data": {
+    "rawData": {
+      "employee": {
+        "name": "Andres"
+      }
+    }
+  },
+  "status": "GENERATED",
+  "artifact": {
+    "content": "<Buffer>",
+    "filename": "document-1774553220515.pdf",
+    "meta": {
+      "generatedAt": "2026-03-26T19:27:00.515Z",
+      "size": 36092,
+      "mimeType": "application/pdf"
+    }
+  }
+}

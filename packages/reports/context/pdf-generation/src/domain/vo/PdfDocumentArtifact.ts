@@ -24,7 +24,7 @@ export class PdfDocumentArtifact extends ValueObject<PdfDocumentArtifactProps> {
   }): PdfDocumentArtifact {
     return new PdfDocumentArtifact({
       ...props,
-      filename: `document-${Date.now()}.pdf`,
+      filename: `document-${Date.now()}.pdf`
     })
   }
 
@@ -44,9 +44,9 @@ export class PdfDocumentArtifact extends ValueObject<PdfDocumentArtifactProps> {
         ? {
             generatedAt: this.props.meta.generatedAt,
             size: this.props.meta.size,
-            mimeType: this.props.meta.mimeType,
+            mimeType: this.props.meta.mimeType
           }
-        : undefined,
+        : undefined
     }
   }
 

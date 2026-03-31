@@ -15,7 +15,7 @@ export const handler = lambdaHandler(
     const tenantId = event.headers['x-api-key']
     if (!tenantId)
       return jsonResponse(401, {
-        message: 'Unauthorized',
+        message: 'Unauthorized'
       })
 
     const command = GeneratePdfDocumentCommandSchema.parse(
@@ -42,7 +42,7 @@ export const handler = lambdaHandler(
 
     return {
       id: result.id.toString(),
-      publicTempUrl,
+      publicTempUrl
     }
   }
 )

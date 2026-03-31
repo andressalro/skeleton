@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "local:serve": "ts-node src/local-server.ts"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.152"
@@ -12,6 +13,7 @@
   "dependencies": {
     "@contexts/pdf-generation": "workspace:^",
     "@libs/common-infra": "workspace:^",
+    "@libs/core": "workspace:^",
     "zod": "^4.1.8"
   }
 }

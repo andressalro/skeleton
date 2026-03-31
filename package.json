@@ -9,6 +9,8 @@
     "test:watch": "vitest --watch",
     "lint": "eslint . --ext .ts,.js --fix",
     "format": "prettier --write .",
+    "pdf:local": "ts-node packages/reports/apps/pdf-generation/src/local-server.ts",
+    "pdf:local:docker": "docker compose -f docker-compose.local.yml up --build",
     "synth": "pnpm --dir infra cdk synth",
     "diff": "pnpm --dir infra cdk diff",
     "deploy": "pnpm --dir infra cdk deploy"

@@ -19,11 +19,11 @@ describe('ValueObject', () => {
   it('should assign and expose props', () => {
     const address = new Address({
       street: new Street({ name: 'Main', number: 123 }),
-      city: 'NY',
+      city: 'NY'
     })
     expect(address.toPrimitives()).toEqual({
       street: { name: 'Main', number: 123 },
-      city: 'NY',
+      city: 'NY'
     })
   })
 
@@ -37,15 +37,15 @@ describe('ValueObject', () => {
   it('should compare equality ', () => {
     const a1 = new Address({
       street: new Street({ name: 'Main', number: 123 }),
-      city: 'NY',
+      city: 'NY'
     })
     const a2 = new Address({
       street: new Street({ name: 'Main', number: 123 }),
-      city: 'NY',
+      city: 'NY'
     })
     const a3 = new Address({
       street: new Street({ name: 'Other', number: 456 }),
-      city: 'LA',
+      city: 'LA'
     })
     expect(a1.equals(a2)).toBe(true)
     expect(a1.equals(a3)).toBe(false)
@@ -56,19 +56,19 @@ describe('ValueObject', () => {
     const address = new Address({
       street: new Street({ name: 'Main', number: 123 }),
       city: 'NY',
-      anyStringArray: ['one', 'two'],
+      anyStringArray: ['one', 'two']
     })
     expect(address.toPrimitives()).toEqual({
       street: { name: 'Main', number: 123 },
       city: 'NY',
-      anyStringArray: ['one', 'two'],
+      anyStringArray: ['one', 'two']
     })
   })
 
   it('toString should return JSON string of props', () => {
     const address = new Address({
       street: new Street({ name: 'Main', number: 123 }),
-      city: 'NY',
+      city: 'NY'
     })
     expect(address.toString()).toBe(
       '{"street":{"name":"Main","number":123},"city":"NY"}'

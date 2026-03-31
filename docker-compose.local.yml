@@ -1,0 +1,14 @@
+services:
+  pdf-local:
+    build:
+      context: .
+      dockerfile: packages/reports/apps/pdf-generation/Dockerfile.local
+    ports:
+      - "3100:3100"
+    environment:
+      PDF_GENERATION_MODE: local
+      LOCAL_OUTPUT_DIR: /app/local-output
+      LOCAL_PORT: 3100
+      CHROMIUM_EXECUTABLE_PATH: /usr/bin/chromium
+    volumes:
+      - ./local-output:/app/local-output

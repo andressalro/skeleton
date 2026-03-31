@@ -35,3 +35,61 @@ pnpm build
 pnpm synth
 pnpm deploy
 ```
+
+## Probar PDF localmente
+
+Puedes correr `pdf-generation` sin Lambda y sin AWS:
+
+```bash
+pnpm pdf:local
+```
+
+Esto levanta un servidor local en `http://localhost:3100/pdf-document` y guarda:
+
+- PDFs en `local-output/<tenantId>/`
+- metadata JSON en `local-output/<tenantId>/metadata/`
+
+Header requerido:
+
+```text
+x-api-key: local-tenant
+```
+
+Payload ejemplo:
+
+```json
+{
+  "template": {
+    "engine": "ejs",
+    "body": "<html><body><h1><%= employee.name %></h1></body></html>",
+    "header": "<div>Recibo</div>",
+    "footer": "<div>Página <span class='pageNumber'></span></div>",
+    "printConfig": {
+      "top": "0.4",
+      "bottom": "0.6",
+      "left": "0.3",
+      "right": "0.2",
+      "format": "Letter"
+    }
+  },
+  "data": {
+    "employee": {
+      "name": "Andres"
+    }
+  }
+}
+```
+
+En Windows, si Chrome o Edge no están en una ruta estándar, define:
+
+```bash
+set CHROMIUM_EXECUTABLE_PATH=C:\ruta\chrome.exe
+```
+
+## Docker Compose
+
+También puedes correrlo con Docker:
+
+```bash
+pnpm pdf:local:docker
+```

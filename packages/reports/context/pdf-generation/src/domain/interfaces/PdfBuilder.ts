@@ -1,6 +1,6 @@
+import { RenderedReceiptTemplate } from '../entities/ReceiptTemplate'
 import { PdfDocumentArtifact } from '../vo/PdfDocumentArtifact'
-import { RenderedTemplateContent } from '../vo/RenderedTemplateContent'
 
 export interface PdfBuilder {
-  build(renderedContent: RenderedTemplateContent): Promise<PdfDocumentArtifact>
+  build(renderedContent: RenderedReceiptTemplate): Promise<PdfDocumentArtifact>
 }

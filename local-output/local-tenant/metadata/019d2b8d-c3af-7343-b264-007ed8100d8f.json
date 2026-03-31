@@ -1,0 +1,37 @@
+{
+  "id": "019d2b8d-c3af-7343-b264-007ed8100d8f",
+  "template": {
+    "id": "019d2b8d-c3ae-766a-85a9-bec15fdd3fb4",
+    "name": "inline-template",
+    "content": {
+      "body": "<html><body><h1><%= employee.name %></h1></body></html>",
+      "header": "<div>Header</div>",
+      "footer": "<div>Footer</div>",
+      "engine": "ejs",
+      "printConfig": {
+        "top": "0.4",
+        "bottom": "0.4",
+        "left": "0.4",
+        "right": "0.4",
+        "format": "Letter"
+      }
+    }
+  },
+  "data": {
+    "rawData": {
+      "employee": {
+        "name": "Local Test"
+      }
+    }
+  },
+  "status": "GENERATED",
+  "artifact": {
+    "content": "<Buffer>",
+    "filename": "document-1774552207022.pdf",
+    "meta": {
+      "generatedAt": "2026-03-26T19:10:07.022Z",
+      "size": 27193,
+      "mimeType": "application/pdf"
+    }
+  }
+}

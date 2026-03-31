@@ -1,0 +1,40 @@
+{
+  "id": "019d3b1e-7df7-7060-80d7-dd670b4c76ac",
+  "template": {
+    "id": "019d3b1e-7df6-713f-b239-997023297e15",
+    "name": "inline-template",
+    "content": {
+      "body": "<html><body><h1><%= employee.name %></h1><p>Total: <%= payroll.total %></p></body></html>",
+      "header": "<div>Recibo</div>",
+      "footer": "<div>Pagina <span class='pageNumber'></span></div>",
+      "engine": "ejs",
+      "printConfig": {
+        "top": "0.4",
+        "bottom": "0.6",
+        "left": "0.3",
+        "right": "0.2",
+        "format": "Letter"
+      }
+    }
+  },
+  "data": {
+    "rawData": {
+      "employee": {
+        "name": "Andres"
+      },
+      "payroll": {
+        "total": 1250
+      }
+    }
+  },
+  "status": "GENERATED",
+  "artifact": {
+    "content": "<Buffer>",
+    "filename": "document-1774813350319.pdf",
+    "meta": {
+      "generatedAt": "2026-03-29T19:42:30.319Z",
+      "size": 43231,
+      "mimeType": "application/pdf"
+    }
+  }
+}

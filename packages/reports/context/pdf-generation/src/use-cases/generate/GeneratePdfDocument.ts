@@ -1,46 +1,64 @@
 import { EventPublisher, UseCase } from '@libs/core'
 import { GeneratePdfDocumentCommand } from './GeneratePdfDocumentCommand'
-import { TemplateNotFoundError } from '../../domain/errors/TemplateNotFound'
-import { TemplateRepository } from '../../domain/repositories/TemplateRepository'
+import { ResolveReceiptTemplate } from './ResolveReceiptTemplate'
+import { ReceiptTemplateNotFoundError } from '../../domain/errors/ReceiptTemplateNotFound'
+import { ReceiptTemplateRepository } from '../../domain/repositories/ReceiptTemplateRepository'
 import { PdfDocumentRepository } from '../../domain/repositories/PdfDocumentRepository'
-import { PdfDocument } from '../../domain/PdfDocument'
-import { PdfRawData } from '../../domain/vo/PdfRawData'
+import { PdfDocument } from '../../domain/aggregates/PdfDocument'
 import { PdfDocumentArtifactStore } from '../../domain/repositories/PdfDocumentArtifactStore'
 import { TemplateEngine } from '../../domain/interfaces/TemplateEngine'
 import { PdfBuilder } from '../../domain/interfaces/PdfBuilder'
+import { PdfDocumentGenerationService } from './PdfDocumentGenerationService'
+import { PdfRawData } from '../../domain/vo/PdfRawData'
 
-export class GeneratePdfDocument
-  implements UseCase<GeneratePdfDocumentCommand, PdfDocument>
-{
+export class GeneratePdfDocument implements UseCase<
+  GeneratePdfDocumentCommand,
+  PdfDocument
+> {
+  private readonly generationService: PdfDocumentGenerationService
+  private readonly resolveReceiptTemplate: ResolveReceiptTemplate
+
   constructor(
     private readonly pdfDocumentRepository: PdfDocumentRepository,
-    private readonly pdfDocumentArtifactStore: PdfDocumentArtifactStore,
-    private readonly templateRepository: TemplateRepository,
-    private readonly templateEngine: TemplateEngine,
-    private readonly pdfBuilder: PdfBuilder,
+    pdfDocumentArtifactStore: PdfDocumentArtifactStore,
+    templateRepository: ReceiptTemplateRepository,
+    templateEngine: TemplateEngine,
+    pdfBuilder: PdfBuilder,
     private readonly eventPublisher: EventPublisher
-  ) {}
-  async execute(command: GeneratePdfDocumentCommand) {
-    const template = await this.templateRepository.findById(command.template)
+  ) {
+    this.resolveReceiptTemplate = new ResolveReceiptTemplate(templateRepository)
+    this.generationService = new PdfDocumentGenerationService(
+      pdfDocumentArtifactStore,
+      templateEngine,
+      pdfBuilder
+    )
+  }
 
-    if (!template) {
-      throw new TemplateNotFoundError(command.template)
+  async execute(command: GeneratePdfDocumentCommand) {
+    const resolvedReceiptTemplate =
+      await this.resolveReceiptTemplate.execute(command)
+
+    if (!resolvedReceiptTemplate && typeof command.template === 'string') {
+      throw new ReceiptTemplateNotFoundError(command.template)
+    }
+
+    if (!resolvedReceiptTemplate) {
+      throw new Error('Receipt template could not be resolved')
     }
 
     const pdfDocument = PdfDocument.create({
-      template,
-      data: PdfRawData.create(command.data),
+      template: resolvedReceiptTemplate,
+      data: PdfRawData.create(command.data)
     })
 
-    await pdfDocument.build(
-      this.templateEngine,
-      this.pdfBuilder,
-      this.pdfDocumentArtifactStore
-    )
-
-    await this.pdfDocumentRepository.save(pdfDocument)
-
-    this.eventPublisher.publish(pdfDocument.pullDomainEvents())
-    return pdfDocument
+    try {
+      await this.generationService.build(pdfDocument)
+      await this.pdfDocumentRepository.save(pdfDocument)
+      this.eventPublisher.publish(pdfDocument.pullDomainEvents())
+      return pdfDocument
+    } catch (error) {
+      await this.pdfDocumentRepository.save(pdfDocument)
+      throw error
+    }
   }
 }

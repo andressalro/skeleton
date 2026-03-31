@@ -79,7 +79,7 @@ export abstract class Entity<T extends EntityProps> {
     }
     return {
       id: this.id.toString(),
-      ...primitive,
+      ...primitive
     } as WithId<T> // TODO: fix this any cast
   }
 
