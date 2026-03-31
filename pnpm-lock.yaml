@@ -98,26 +98,7 @@ importers:
         specifier: ^5.9.2
         version: 5.9.3
 
-  packages/reports/apps/pdf-generation:
-    dependencies:
-      '@contexts/pdf-generation':
-        specifier: workspace:^
-        version: link:../../context/pdf-generation
-      '@libs/common-infra':
-        specifier: workspace:^
-        version: link:../../../../common-infra
-      '@libs/core':
-        specifier: workspace:^
-        version: link:../../../../shared/core
-      zod:
-        specifier: ^4.1.8
-        version: 4.3.6
-    devDependencies:
-      '@types/aws-lambda':
-        specifier: ^8.10.152
-        version: 8.10.161
-
-  packages/reports/context/pdf-generation:
+  packages/utils/pdf-generation:
     dependencies:
       '@aws-sdk/client-s3':
         specifier: ^3.908.0
@@ -128,9 +109,12 @@ importers:
       '@aws-sdk/s3-request-presigner':
         specifier: ^3.908.0
         version: 3.1017.0
+      '@libs/common-infra':
+        specifier: workspace:*
+        version: link:../../../common-infra
       '@libs/core':
         specifier: workspace:*
-        version: link:../../../../shared/core
+        version: link:../../../shared/core
       '@sparticuz/chromium':
         specifier: 141.0.0
         version: 141.0.0
@@ -153,6 +137,9 @@ importers:
       '@puppeteer/browsers':
         specifier: ^2.10.11
         version: 2.13.0
+      '@types/aws-lambda':
+        specifier: ^8.10.152
+        version: 8.10.161
       '@types/ejs':
         specifier: ^3.1.5
         version: 3.1.5

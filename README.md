@@ -7,9 +7,8 @@ Monorepo base para microfrontends, microservicios y despliegue con AWS CDK.
 ```text
 web/                             Frontends y microfrontends
 packages/
-  reports/
-    apps/                        Entrypoints del dominio reports
-    context/                     Bounded contexts DDD del dominio reports
+  utils/
+    pdf-generation/              Utilidad con capas application/domain/infrastructure/interface
 shared/
   core/                          Building blocks compartidos de DDD/aplicacion
 common-infra/                    Clientes e infraestructura reutilizable
@@ -18,7 +17,7 @@ infra/                           CDK stacks y constructs
 
 ## Flujo actual
 
-Este skeleton ya incluye un contexto funcional de `pdf-generation`, con:
+Este skeleton ya incluye una utilidad funcional de `pdf-generation`, con:
 
 - Lambda HTTP para generar PDFs
 - Contexto DDD de generacion de PDF

@@ -1,0 +1,13 @@
+ERROR CAUGHT BY WRAPPER: SyntaxError: Expected property name or '}' in JSON at position 4 (line 2 column 3)
+    at JSON.parse (<anonymous>)
+    at D:\stt\skeleton\packages\utils\pdf-generation\src\interfaces\functions\lambda\index.ts:22:12
+    at D:\stt\skeleton\common-infra\src\infrastructure\helpers\HttpLambdaWrapper.ts:32:28
+    at Server.<anonymous> (D:\stt\skeleton\packages\utils\pdf-generation\src\interfaces\servers\local\index.ts:27:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+ERROR CAUGHT BY WRAPPER: SyntaxError: Unexpected token '﻿', "﻿{
+  "temp"... is not valid JSON
+    at JSON.parse (<anonymous>)
+    at D:\stt\skeleton\packages\utils\pdf-generation\src\interfaces\functions\lambda\index.ts:22:12
+    at D:\stt\skeleton\common-infra\src\infrastructure\helpers\HttpLambdaWrapper.ts:32:28
+    at Server.<anonymous> (D:\stt\skeleton\packages\utils\pdf-generation\src\interfaces\servers\local\index.ts:27:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)

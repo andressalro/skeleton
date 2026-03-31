@@ -1,0 +1,98 @@
+
+> skeleton@1.0.0 pdf:local D:\stt\skeleton
+> ts-node packages/utils/pdf-generation/src/interfaces/servers/local/index.ts
+
+PDF local server listening on http://localhost:3100
+Output dir: local-output
+Building PDF document...
+Local domain events: [
+  {
+    "aggregateId": "019d44d0-12d3-706e-a7d4-f9ef5ec64b32",
+    "name": "PDFDocument.Generated",
+    "eventId": "019d44d0-221c-70c9-bcd0-fc875e3b7879",
+    "occurredAt": 1774975984156,
+    "payload": {
+      "id": "019d44d0-12d3-706e-a7d4-f9ef5ec64b32",
+      "template": {
+        "id": "019d44d0-12d2-70ee-967a-02ead5746a75",
+        "name": "inline-template",
+        "body": "<html><body style=\"font-family: Arial; padding: 32px;\"><h1>Comprobante</h1><p>Empleado: {{employee.name}}</p><p>Documento: {{employee.document}}</p><p>Total: {{total}}</p></body></html>",
+        "header": "<div style=\"font-size:10px; width:100%; text-align:center;\">PDF demo local</div>",
+        "footer": "<div style=\"font-size:10px; width:100%; text-align:right;\">Pagina <span class='pageNumber'></span></div>",
+        "engine": "handlebars",
+        "printConfig": {
+          "top": "0.4",
+          "bottom": "0.6",
+          "left": "0.4",
+          "right": "0.4",
+          "format": "Letter"
+        }
+      },
+      "data": {
+        "rawData": {
+          "employee": {
+            "name": "Ada Lovelace",
+            "document": "CC-100200300"
+          },
+          "total": "$ 1,250.00"
+        }
+      },
+      "status": "GENERATED",
+      "artifact": {
+        "content": "<Buffer>",
+        "filename": "document-1774975984154.pdf",
+        "meta": {
+          "generatedAt": "2026-03-31T16:53:04.154Z",
+          "size": 35364,
+          "mimeType": "application/pdf"
+        }
+      }
+    }
+  }
+]
+Building PDF document...
+Local domain events: [
+  {
+    "aggregateId": "019d44d4-c2f2-717c-b513-ccf95161414a",
+    "name": "PDFDocument.Generated",
+    "eventId": "019d44d4-cd09-778e-ae88-5e96eb3acd0e",
+    "occurredAt": 1774976290057,
+    "payload": {
+      "id": "019d44d4-c2f2-717c-b513-ccf95161414a",
+      "template": {
+        "id": "019d44d4-c2f2-717c-b513-c869e16ecc32",
+        "name": "inline-template",
+        "body": "<html><body style=\"font-family: Arial; padding: 32px;\"><h1>Comprobante</h1><p>Empleado: {{employee.name}}</p><p>Documento: {{employee.document}}</p><p>Total: {{total}}</p></body></html>",
+        "header": "<div style=\"font-size:10px; width:100%; text-align:center;\">PDF demo local</div>",
+        "footer": "<div style=\"font-size:10px; width:100%; text-align:right;\">Pagina <span class='pageNumber'></span></div>",
+        "engine": "handlebars",
+        "printConfig": {
+          "top": "0.4",
+          "bottom": "0.6",
+          "left": "0.4",
+          "right": "0.4",
+          "format": "Letter"
+        }
+      },
+      "data": {
+        "rawData": {
+          "employee": {
+            "name": "Ada Lovelace",
+            "document": "CC-100200300"
+          },
+          "total": "$ 1,250.00"
+        }
+      },
+      "status": "GENERATED",
+      "artifact": {
+        "content": "<Buffer>",
+        "filename": "document-1774976290056.pdf",
+        "meta": {
+          "generatedAt": "2026-03-31T16:58:10.056Z",
+          "size": 35364,
+          "mimeType": "application/pdf"
+        }
+      }
+    }
+  }
+]

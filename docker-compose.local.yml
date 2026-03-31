@@ -2,7 +2,7 @@ services:
   pdf-local:
     build:
       context: .
-      dockerfile: packages/reports/apps/pdf-generation/Dockerfile.local
+      dockerfile: packages/utils/pdf-generation/Dockerfile.local
     ports:
       - "3100:3100"
     environment:

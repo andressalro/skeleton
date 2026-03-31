@@ -3,6 +3,5 @@ packages:
   - "common-infra"
   - "infra"
   - "shared/*"
-  - "packages/reports/apps/*"
-  - "packages/reports/context/*"
+  - "packages/utils/*"
   - "web/*"

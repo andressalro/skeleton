@@ -23,14 +23,14 @@ export class PdfGenerationStack extends cdk.Stack {
     const documentsBucket = new Bucket(this, 'DocumentsBucket', {
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       encryption: BucketEncryption.S3_MANAGED,
-      removalPolicy: cdk.RemovalPolicy.RETAIN,
+      removalPolicy: cdk.RemovalPolicy.RETAIN
     })
 
     const documentsTable = new Table(this, 'DocumentsTable', {
       partitionKey: { name: 'PK', type: AttributeType.STRING },
       sortKey: { name: 'SK', type: AttributeType.STRING },
       removalPolicy: cdk.RemovalPolicy.RETAIN,
-      billingMode: BillingMode.PAY_PER_REQUEST,
+      billingMode: BillingMode.PAY_PER_REQUEST
     })
 
     const eventBus = EventBus.fromEventBusName(
@@ -50,7 +50,7 @@ export class PdfGenerationStack extends cdk.Stack {
         handler: 'handler',
         entry: path.join(
           __dirname,
-          '../../../packages/reports/apps/pdf-generation/src/index.ts'
+          '../../../packages/utils/pdf-generation/src/interfaces/functions/lambda/index.ts'
         ),
         environment: {
           DOCUMENTS_BUCKET_NAME: documentsBucket.bucketName,
@@ -58,12 +58,12 @@ export class PdfGenerationStack extends cdk.Stack {
           DYNAMO_PDF_TABLE_NAME: documentsTable.tableName,
           DYNAMO_TEMPLATE_TABLE_NAME: documentsTable.tableName,
           EVENT_BUS_NAME: eventBus.eventBusName,
-          EVENT_SOURCE: 'aps.utils.pdf-generation',
+          EVENT_SOURCE: 'aps.utils.pdf-generation'
         },
         logGroup: new DisposableLogGroup(
           this,
           `/aws/lambda/${moduleName}PdfGenerationFunction`
-        ),
+        )
       }
     )
 
@@ -77,7 +77,7 @@ export class PdfGenerationStack extends cdk.Stack {
       integration: new HttpLambdaIntegration(
         'PdfGenerationFunction',
         pdfGenerationFunction
-      ),
+      )
     })
   }
 }
